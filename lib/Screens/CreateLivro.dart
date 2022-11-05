@@ -3,18 +3,20 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:framework_project/Providers/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../Classes/Livros.dart';
 
 Future<Livros> createLivro(
-    String nome, String editora, String author, String ano) async {
+    String nome, String editora, String author, int? ano) async {
   final response = await http.post(
-    Uri.parse('http://192.168.100.9:3001/api/livros'),
+    Uri.parse('https://livros.s1.sandbox.inf.br/api/livros'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(<String, String>{
+    body: jsonEncode(<String, dynamic>{
       'nome': nome,
       'editora': editora,
       'author': author,
@@ -228,9 +230,15 @@ class _CreateLivroPageState extends State<CreateLivroPage> {
                     ),
                     onPressed: () {
                       setState(() {
-                        _futureAlbum = createLivro(txtNomeLivro.text,
-                            txtEditora.text, txtAuthor.text, txtAno.text);
+                        _futureAlbum = createLivro(
+                          txtNomeLivro.text,
+                          txtEditora.text,
+                          txtAuthor.text,
+                          int.parse(txtAno.text),
+                        );
                       });
+                      Navigator.pop(context);
+                      context.read<Providers>().onChanged();
                     },
                   ),
                 ),
