@@ -237,8 +237,8 @@ class _CreateLivroPageState extends State<CreateLivroPage> {
                           int.parse(txtAno.text),
                         );
                       });
-                      Navigator.pop(context);
                       context.read<Providers>().onChanged();
+                      Navigator.pop(context);
                     },
                   ),
                 ),
