@@ -12,15 +12,10 @@ Future<List<Livros>> fetchLivros() async {
   final response =
       await http.get(Uri.parse('https://livros.s1.sandbox.inf.br/api/livros'));
 
-  print(response);
-  print(response.body);
-
   if (response.statusCode == 200) {
     List listaLivros = json.decode(response.body);
     return listaLivros.map((json) => Livros.fromJson(json)).toList();
   } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
     throw Exception('Failed to load album');
   }
 }
@@ -74,7 +69,6 @@ class _HomePageState extends State<HomePage> {
                     Livros livros = snapshot.data![index];
                     var idLivro = snapshot.data![index].id;
                     return Container(
-                      //color: Colors.blue.shade900,
                       padding: EdgeInsets.all(15),
                       child: ListTile(
                         tileColor: Colors.white,
@@ -150,12 +144,9 @@ class _HomePageState extends State<HomePage> {
                     );
                   }),
                 );
-                //Text(snapshot.data!.nome);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
-
-              // By default, show a loading spinner.
               return const CircularProgressIndicator();
             },
           ),
@@ -183,7 +174,7 @@ Future<void> dialog(int idLivro, context) {
           TextButton(
             child: const Text('Cancelar'),
             onPressed: () async {
-              Navigator.pushNamed(context, 'home');
+              Navigator.pop(context);
             },
           ),
           TextButton(

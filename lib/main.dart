@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Nutri Aumigos',
+        title: 'Biblioteca VGA',
         theme: ThemeData(
           primaryColor: Colors.white,
         ),
