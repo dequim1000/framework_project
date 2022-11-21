@@ -12,7 +12,7 @@ import '../Classes/Livros.dart';
 Future<Livros> createLivro(
     String nome, String editora, String author, int? ano) async {
   final response = await http.post(
-    Uri.parse('https://livros.s1.sandbox.inf.br/api/livros'),
+    Uri.parse('http://192.168.100.2:3001/api/livros'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -233,8 +233,8 @@ class _CreateLivroPageState extends State<CreateLivroPage> {
                           int.parse(txtAno.text),
                         );
                       });
-                      context.read<Providers>().onChanged();
                       Navigator.pop(context);
+                      context.read<Providers>().onChanged();
                     },
                   ),
                 ),

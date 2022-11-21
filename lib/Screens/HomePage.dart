@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 Future<List<Livros>> fetchLivros() async {
   final response =
-      await http.get(Uri.parse('https://livros.s1.sandbox.inf.br/api/livros'));
+      await http.get(Uri.parse('http://192.168.100.2:3001/api/livros'));
 
   if (response.statusCode == 200) {
     List listaLivros = json.decode(response.body);
@@ -183,7 +183,7 @@ Future<void> dialog(int idLivro, context) {
               try {
                 await http.delete(
                   Uri.parse(
-                      'https://livros.s1.sandbox.inf.br/api/livros/$idLivro'),
+                      'http://192.168.100.2:3001/api/livros/$idLivro'),
                 );
               } catch (e) {
                 print(e);
